@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Unzip project
-        run: unzip -o OfflineChat-Project.zip -d proj
+        run: unzip -o "OfflineChat-Project (1).zip" -d proj
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -17,9 +17,12 @@ jobs:
         with:
           gradle-version: 8.7
       - name: Build debug APK
-        working-directory: proj
-        run: gradle assembleDebug --no-daemon
+        run: |
+          DIR=$(dirname "$(find proj -name 'settings.gradle*' | head -n 1)")
+          cd "$DIR"
+          gradle assembleDebug --no-daemon
       - uses: actions/upload-artifact@v4
         with:
           name: OfflineChat-APK
+          path: proj/**/build/outputs/apk/debug/*.apk
           path: proj/app/build/outputs/apk/debug/app-debug.apk
