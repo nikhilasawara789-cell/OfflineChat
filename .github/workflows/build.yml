@@ -25,4 +25,3 @@ jobs:
         with:
           name: OfflineChat-APK
           path: proj/**/build/outputs/apk/debug/*.apk
-          path: proj/app/build/outputs/apk/debug/app-debug.apk
