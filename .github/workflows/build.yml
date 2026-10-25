@@ -8,7 +8,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Unzip project
-        run: unzip -o OfflineChat-Project.zip -d proj
+        shell: bash
+        run: |
+          if [ -f OfflineChat-Project.zip ]; then f=OfflineChat-Project.zip; else f=$(ls *.zip 2>/dev/null | head -1); fi
+          if [ -z "$f" ]; then
+            echo '## Repository me koi .zip file nahi mili. Repository ki files:' >> $GITHUB_STEP_SUMMARY
+            ls -la >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+          echo "Using zip: $f"
+          unzip -o "$f" -d proj
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
