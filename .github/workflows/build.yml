@@ -10,7 +10,7 @@ jobs:
       - name: Unzip project
         shell: bash
         run: |
-          if [ -f OfflineChat-Project[4].zip ]; then f=OfflineChat-Project[4].zip; else f=$(ls *.zip 2>/dev/null | head -1); fi
+          if [ -f OfflineChat-Project(4).zip ]; then f=OfflineChat-Project(4).zip; else f=$(ls *.zip 2>/dev/null | head -1); fi
           if [ -z "$f" ]; then
             echo '## Repository me koi .zip file nahi mili. Repository ki files:' >> $GITHUB_STEP_SUMMARY
             ls -la >> $GITHUB_STEP_SUMMARY
